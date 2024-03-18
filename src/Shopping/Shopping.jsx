@@ -113,6 +113,7 @@ const Shopping = () => {
     <>
       <Navbar setShowAddItem={setShowAddItem} />
       <main>
+        <h1>Shopping List</h1>
         {stores.map((store, index) => (
           <section key={index}>
             <div className="header">
