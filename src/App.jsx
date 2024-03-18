@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Shopping from "./Shopping/Shopping";
-import "./App.scss";
 
 function App() {
   return (

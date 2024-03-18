@@ -1,52 +1,73 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
-import { ref, set, onValue } from "firebase/database";
+import { ref, onValue, remove } from "firebase/database";
 
 import Navbar from "./Navbar";
+import AddItem from "./AddItem";
 import "./Shopping.scss";
 
-const ShoppingItem = ({ name, quantity, description }) => {
+const ShoppingItem = ({ item }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleMenu = () => {
     setShowMenu((prevState) => !prevState);
   };
 
+  const handleOutsideClick = (event) => {
+    if (!event.target.closest(".complete")) {
+      handleMenu();
+    }
+  };
+
+  const handleDelete = async () => {
+    await remove(ref(db, "shopping_items/" + item.name));
+  };
+
+  const handleComplete = async () => {
+    // await set(ref(db, "shopping_items/" + item.name), {
+    //   name: item.name,
+    //   quantity: item.quantity,
+    //   store: item.store,
+    //   description: item.description,
+    //   completed: true,
+    // });
+  };
+
   return (
-    <div className={`shopping-item `}>
-      <button className="complete">
+    <div
+      className={`shopping-item ${showMenu ? "shift-left" : ""}`}
+      onClick={handleOutsideClick}
+    >
+      <button className="complete" onClick={handleComplete}>
         <i className="bi bi-check-lg"></i>
       </button>
-      <h2>{name}</h2>
-      <p>{quantity}</p>
-      <p>{description}</p>
-      <button
-        className={`menu-button ${showMenu ? "shift" : ""}`}
-        onClick={handleMenu}
-      >
-        <i className="bi bi-three-dots"></i>
-      </button>
+      <h2>{item.name}</h2>
+      <div className="details">
+        <p>{item.quantity}</p>
+        <p>{item.description}</p>
+      </div>
       <div className={`menu ${showMenu ? "show" : "hide"}`}>
-        <button className="edit">
-          <i className="bi bi-pencil-square"></i>
-        </button>
-        <button className="edit">
-          <i className="bi bi-trash-fill"></i>
-        </button>
+        {showMenu && (
+          <>
+            <button className="edit">
+              <i className="bi bi-pencil-square"></i>
+            </button>
+            <button className="delete" onClick={handleDelete}>
+              <i className="bi bi-trash-fill"></i>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
 ShoppingItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 const Shopping = () => {
-  //   let stores = ["Costco", "Walmart"];
   const [items, setItems] = useState([]);
   const [stores, setStores] = useState([
     {
@@ -58,6 +79,7 @@ const Shopping = () => {
       expanded: true,
     },
   ]);
+  const [showAddItem, setShowAddItem] = useState(false);
 
   const handleExpand = (storeIndex) => {
     setStores((prevStores) => {
@@ -83,23 +105,13 @@ const Shopping = () => {
     });
   };
 
-  const test = async () => {
-    await set(ref(db, "shopping_items/" + "test"), {
-      name: "parsley",
-      quantity: 2,
-      store: "costco",
-      description: "sdas",
-      completed: true,
-    });
-  };
-
   useEffect(() => {
     fetchItems();
   }, []);
 
   return (
     <>
-      <Navbar />
+      <Navbar setShowAddItem={setShowAddItem} />
       <main>
         {stores.map((store, index) => (
           <section key={index}>
@@ -114,26 +126,20 @@ const Shopping = () => {
               </button>
             </div>
             <div
-              className={`shopping-items ${store.expanded ? "show" : "hide"}`}
+              className={`shopping-items ${
+                store.expanded ? "show-section" : "hide-section"
+              }`}
             >
-              <ShoppingItem name="Parsley" quantity="12" description="packs" />
-              <ShoppingItem name="Apple" quantity="9" description="adas" />
-              <ShoppingItem name="Banana" quantity="4" description="adas" />
               {items
                 .filter((item) => item.store === store.name && !item.completed)
                 .map((item, index) => (
-                  <ShoppingItem
-                    key={index}
-                    name={item.name}
-                    quantity={item.quantity}
-                    description={item.description}
-                  />
+                  <ShoppingItem key={index} item={item} />
                 ))}
             </div>
           </section>
         ))}
 
-        <button onClick={test}>asdasd</button>
+        <AddItem showAddItem={showAddItem} setShowAddItem={setShowAddItem} />
       </main>
     </>
   );

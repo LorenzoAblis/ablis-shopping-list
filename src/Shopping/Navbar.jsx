@@ -1,12 +1,17 @@
+import PropTypes from "prop-types";
 import "./Navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ setShowAddItem }) => {
+  const handleShow = () => {
+    setShowAddItem((prevState) => !prevState);
+  };
+
   return (
     <header>
       <nav>
         <ul>
           <li>
-            <button className="add">
+            <button className="add" onClick={handleShow}>
               <i className="bi bi-plus-lg"></i> Add
             </button>
           </li>
@@ -19,6 +24,10 @@ const Navbar = () => {
       </nav>
     </header>
   );
+};
+
+Navbar.propTypes = {
+  setShowAddItem: PropTypes.func.isRequired,
 };
 
 export default Navbar;
