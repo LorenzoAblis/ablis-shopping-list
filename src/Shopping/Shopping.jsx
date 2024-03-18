@@ -105,6 +105,20 @@ const Shopping = () => {
     });
   };
 
+  const getStoreItemCount = (storeName) => {
+    if (
+      items.filter((item) => item.store === storeName && !item.completed)
+        .length !== 0
+    ) {
+      return `${
+        items.filter((item) => item.store === storeName && !item.completed)
+          .length
+      } items`;
+    } else {
+      return `No items for ${storeName}`;
+    }
+  };
+
   useEffect(() => {
     fetchItems();
   }, []);
@@ -113,7 +127,7 @@ const Shopping = () => {
     <>
       <Navbar setShowAddItem={setShowAddItem} />
       <main>
-        <h1>Shopping List</h1>
+        <h1 className="nav-title">Shopping List</h1>
         {stores.map((store, index) => (
           <section key={index}>
             <div className="header">
@@ -125,6 +139,9 @@ const Shopping = () => {
                   }`}
                 ></i>
               </button>
+            </div>
+            <div className="store-item-count">
+              {getStoreItemCount(store.name)}
             </div>
             <div
               className={`shopping-items ${
