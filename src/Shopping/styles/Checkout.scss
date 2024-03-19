@@ -1,82 +1,47 @@
 @import "../../index.scss";
 
-.hide-checkout {
-  @keyframes hideCheckout {
-    0% {
-      opacity: 1;
-      z-index: 100;
-      transform: translateX(0%);
-      display: block;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(100%);
-      display: none;
-    }
-  }
-
-  animation: hideCheckout 0.5s forwards;
+.clear-button {
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
 }
 
-.show-checkout {
-  @keyframes showCheckout {
-    0% {
-      opacity: 0;
-      transform: translateX(100%);
-      display: none;
+.stores {
+  .store {
+    margin-bottom: 0.5rem;
+    .store-name {
+      margin: 0;
     }
-    100% {
-      opacity: 1;
-      transform: translateX(0%);
-      display: block;
+
+    .store-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
   }
-
-  animation: showCheckout 0.5s forwards;
 }
 
-.checkout {
+.confirmation {
+  font-size: 0.8rem;
+
+  .confirmation-warning {
+    font-size: 0.8rem;
+    color: red;
+  }
+}
+
+.footer {
   display: flex;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1;
-  backdrop-filter: blur(5px);
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  flex-direction: column;
 
-  .card {
-    top: -10%;
-    background-color: white;
-    position: relative;
-    padding: 1rem;
+  .checkout-button {
+    color: white;
+    padding: 0.25rem;
     border-radius: 1rem;
-    width: 70vw;
-    z-index: 200;
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-
-      h2 {
-        margin: 0;
-        font-size: 1.2rem;
-      }
-
-      button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: transparent;
-        width: 2rem;
-        color: $text-secondary;
-      }
-    }
+    border: none;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    background-color: skyblue;
+    box-shadow: 0 0 0.25rem skyblue;
   }
 }

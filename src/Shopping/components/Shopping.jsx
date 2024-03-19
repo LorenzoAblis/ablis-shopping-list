@@ -165,6 +165,8 @@ const Shopping = () => {
         <Checkout
           showCheckout={showCheckout}
           setShowCheckout={setShowCheckout}
+          items={items}
+          stores={stores}
         />
         <AddItem showAddItem={showAddItem} setShowAddItem={setShowAddItem} />
         <EditItem
@@ -174,6 +176,7 @@ const Shopping = () => {
         />
       </main>
     </>
+    // <Test></Test>
   );
 };
 

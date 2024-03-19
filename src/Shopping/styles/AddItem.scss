@@ -1,130 +1,49 @@
 @import "../../index.scss";
 
-@keyframes hideAddItem {
-  0% {
-    opacity: 1;
-    z-index: 100;
-    transform: translateX(0%);
-    display: block;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100%);
-    display: none;
-  }
-}
-
-@keyframes showAddItem {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-    display: none;
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0%);
-    display: block;
-  }
-}
-
-.hide-add-item {
-  animation: hideAddItem 0.5s forwards;
-}
-
-.show-add-item {
-  animation: showAddItem 0.5s forwards;
-}
-
-.add-item {
+.form {
   display: flex;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1;
-  backdrop-filter: blur(5px);
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  gap: 0.5rem;
 
-  .card {
-    top: -10%;
-    background-color: white;
-    position: relative;
-    padding: 1rem;
-    border-radius: 1rem;
-    width: 70vw;
-    z-index: 200;
+  .form-group {
+    width: 100%;
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-
-      h2 {
-        margin: 0;
-        font-size: 1.2rem;
-      }
-
-      button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: transparent;
-        width: 2rem;
-        color: $text-secondary;
-      }
+    h3 {
+      margin: 0;
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+      color: $text-secondary;
     }
 
-    .form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.5rem;
+    input {
+      width: 95%;
+      background-color: $background-secondary;
+      border: none;
+      padding: 0.3rem;
+      border-radius: 0.5rem;
+    }
+  }
 
-      .form-group {
-        width: 100%;
+  .form-group-big {
+    display: flex;
+    gap: 1rem;
 
-        h3 {
-          margin: 0;
-          margin-bottom: 0.25rem;
-          font-size: 0.8rem;
-          color: $text-secondary;
-        }
+    .amount {
+      width: 3rem;
+    }
+  }
 
-        input {
-          width: 95%;
-          background-color: $background-secondary;
-          border: none;
-          padding: 0.3rem;
-          border-radius: 0.5rem;
-        }
-      }
+  .footer {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: right;
+    gap: 0.25rem;
 
-      .form-group-big {
-        display: flex;
-        gap: 1rem;
-
-        .amount {
-          width: 3rem;
-        }
-      }
-
-      .footer {
-        display: flex;
-        margin-top: 1rem;
-        justify-content: right;
-        gap: 0.25rem;
-
-        button {
-          background-color: green;
-          color: white;
-          border-radius: 0.5rem;
-        }
-      }
+    button {
+      background-color: green;
+      color: white;
+      border-radius: 0.5rem;
     }
   }
 }

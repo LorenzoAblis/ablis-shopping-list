@@ -164,35 +164,35 @@ main {
             color: white;
           }
 
-          @keyframes hide {
-            0% {
-              opacity: 1;
-              transform: translateX(0%);
-            }
-            100% {
-              opacity: 0;
-              transform: translateX(100%);
-              display: none;
-            }
-          }
-
-          @keyframes show {
-            0% {
-              opacity: 0;
-              transform: translateX(100%);
-            }
-            100% {
-              opacity: 1;
-              display: flex;
-              transform: translateX(0%);
-            }
-          }
-
           &.hide {
+            @keyframes hide {
+              0% {
+                opacity: 1;
+                transform: translateX(0%);
+              }
+              100% {
+                opacity: 0;
+                transform: translateX(100%);
+                display: none;
+              }
+            }
+
             animation: hide 0.5s forwards;
           }
 
           &.show {
+            @keyframes show {
+              0% {
+                opacity: 0;
+                transform: translateX(100%);
+              }
+              100% {
+                opacity: 1;
+                display: flex;
+                transform: translateX(0%);
+              }
+            }
+
             animation: show 0.5s forwards;
           }
         }
@@ -209,6 +209,12 @@ main {
         .complete {
           background-color: green;
           color: white;
+        }
+
+        .details {
+          p {
+            color: black;
+          }
         }
       }
     }

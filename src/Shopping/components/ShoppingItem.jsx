@@ -51,7 +51,7 @@ const ShoppingItem = ({ item, setShowEditItem, setItemToEdit }) => {
 
   return (
     <div
-      className={`shopping-item ${item.completed ? "completed-item" : ""} ${
+      className={`${item.completed ? "completed-item" : ""} shopping-item ${
         showMenu ? "shift-left" : ""
       }`}
       onClick={handleOutsideClick}
