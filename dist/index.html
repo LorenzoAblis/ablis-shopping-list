@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Ablis</title>
+    <link rel="manifest" href="/assets/manifest-BPdnH4JQ.json" />
+    <script type="module" crossorigin src="/assets/index-DqAWn_Hy.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-JT-mb5T3.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/serviceworker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      });
+    }
+  </script>
+</html>
