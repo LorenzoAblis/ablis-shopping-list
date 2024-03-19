@@ -8,10 +8,29 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>Ablis</title>
-    <script type="module" crossorigin src="/assets/index-CX6S-Cn4.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Dau8WQfv.css">
+    <link rel="manifest" href="/assets/manifest-BPdnH4JQ.json" />
+    <script type="module" crossorigin src="/assets/index-DqAWn_Hy.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-JT-mb5T3.css">
   </head>
   <body>
     <div id="root"></div>
   </body>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/serviceworker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      });
+    }
+  </script>
 </html>
