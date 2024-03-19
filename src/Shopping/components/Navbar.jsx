@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Navbar.scss";
+import "../styles/Navbar.scss";
 
 const Navbar = ({ setShowAddItem }) => {
   const handleShow = () => {

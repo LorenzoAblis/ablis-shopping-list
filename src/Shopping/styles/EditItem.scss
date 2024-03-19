@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import "../../index.scss";
 
 @keyframes hideAddItem {
   0% {
@@ -27,15 +27,15 @@
   }
 }
 
-.hide-add-item {
+.hide-edit-item {
   animation: hideAddItem 0.5s forwards;
 }
 
-.show-add-item {
+.show-edit-item {
   animation: showAddItem 0.5s forwards;
 }
 
-aside {
+.edit-item {
   display: flex;
   width: 100vw;
   height: 100vh;

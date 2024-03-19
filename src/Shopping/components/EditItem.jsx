@@ -1,21 +1,15 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { db } from "../../firebaseConfig";
+import { useState, useEffect } from "react";
+import { db } from "/firebaseConfig";
 import { ref, set } from "firebase/database";
 
-import "./AddItem.scss";
+import "../styles/EditItem.scss";
 
-const AddItem = ({ showAddItem, setShowAddItem }) => {
+const EditItem = ({ showEditItem, setShowEditItem, item }) => {
   const [newItem, setNewItem] = useState({});
 
   const handleClose = () => {
-    setShowAddItem(false);
-    setNewItem({
-      name: "",
-      quantity: 0,
-      store: "",
-      description: "",
-    });
+    setShowEditItem(false);
   };
 
   const handleOutsideClick = (event) => {
@@ -24,14 +18,16 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
     }
   };
 
-  const handleAdd = async () => {
-    await set(ref(db, "shopping_items/" + newItem.name), {
-      name: newItem.name || "",
-      quantity: newItem.quantity || 0,
-      store: newItem.store || "",
-      description: newItem.description || "",
-      completed: false,
-    });
+  const handleEdit = async () => {
+    if (newItem.name) {
+      await set(ref(db, "shopping_items/" + newItem.name), {
+        name: newItem.name || "",
+        quantity: newItem.quantity || 0,
+        store: newItem.store || "",
+        description: newItem.description || "",
+        completed: false,
+      });
+    }
 
     handleClose();
   };
@@ -40,15 +36,21 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
     setNewItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  useEffect(() => {
+    setNewItem(item);
+  }, [item]);
+
   return (
     <aside
-      className={`add-item ${showAddItem ? "show-add-item" : "hide-add-item"}`}
+      className={`edit-item ${
+        showEditItem ? "show-edit-item" : "hide-edit-item"
+      }`}
       onClick={handleOutsideClick}
     >
       <div className="card">
         <div className="header">
-          <h2>Add Item</h2>
-          <button onClick={() => setShowAddItem(false)}>
+          <h2>Edit Item</h2>
+          <button onClick={() => setShowEditItem(false)}>
             <i className="bi bi-x-lg"></i>
           </button>
         </div>
@@ -92,7 +94,7 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
             />
           </div>
           <div className="footer">
-            <button onClick={handleAdd}>
+            <button onClick={handleEdit}>
               <i className="bi bi-check-lg"></i>
             </button>
           </div>
@@ -102,9 +104,10 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
   );
 };
 
-AddItem.propTypes = {
-  showAddItem: PropTypes.bool.isRequired,
-  setShowAddItem: PropTypes.func.isRequired,
+EditItem.propTypes = {
+  showEditItem: PropTypes.bool.isRequired,
+  setShowEditItem: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
-export default AddItem;
+export default EditItem;

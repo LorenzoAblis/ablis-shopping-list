@@ -1,20 +1,27 @@
-@import "../index.scss";
+@import "../../index.scss";
 
 main {
-  overflow: hidden;
+  overflow-x: hidden;
 
   .nav-title {
     padding-left: 0.51rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin: 0;
     margin-top: 0.5rem;
     margin-bottom: 0.25rem;
+  }
+
+  .no-items {
+    text-align: center;
+    font-size: 1.25rem;
+    color: $text-secondary;
   }
 
   section {
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
+    margin-bottom: 0.5rem;
     border-radius: 1rem;
 
     .header {
@@ -25,6 +32,7 @@ main {
 
       h1 {
         margin: 0;
+        font-size: 1.3rem;
         font-weight: 600;
       }
 
@@ -41,7 +49,14 @@ main {
 
     .store-item-count {
       color: $text-secondary;
-      padding-bottom: 0.25rem;
+      margin-bottom: 0.25rem;
+      display: flex;
+      gap: 0.75rem;
+
+      .completed-progress {
+        color: $text-secondary;
+        font-weight: 500;
+      }
     }
 
     @keyframes hideSection {
@@ -51,13 +66,13 @@ main {
       100% {
         opacity: 0;
         position: absolute;
-        transform: translateX(100%);
+        transform: translateX(200%);
       }
     }
 
     @keyframes showSection {
       0% {
-        transform: translateX(100%);
+        transform: translateX(200%);
         opacity: 0;
       }
       100% {
@@ -67,7 +82,7 @@ main {
     }
 
     .hide-section {
-      animation: hideSection 1s forwards;
+      animation: hideSection 1.5s forwards;
     }
 
     .show-section {
@@ -97,10 +112,6 @@ main {
           margin-right: 1rem;
           transition: all 0.5s;
           justify-content: center;
-
-          &:hover {
-            background-color: $text-secondary;
-          }
         }
 
         h2 {
@@ -182,6 +193,79 @@ main {
         &.shift-left {
           transform: translateX(-3rem);
           width: 100vw;
+        }
+      }
+
+      .completed-item {
+        background-color: $background-secondary;
+
+        .complete {
+          background-color: green;
+          color: white;
+        }
+      }
+    }
+
+    .hide-completed {
+      @keyframes hide {
+        0% {
+          opacity: 1;
+          z-index: 100;
+          transform: translateX(0%);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(200%);
+          z-index: -100;
+          position: absolute;
+        }
+      }
+
+      animation: hide 1.5s forwards;
+    }
+
+    .show-completed {
+      @keyframes show {
+        0% {
+          opacity: 0;
+          z-index: -100;
+          transform: translateX(200%);
+        }
+        100% {
+          opacity: 1;
+          display: flex;
+          z-index: 100;
+          transform: translateX(0%);
+        }
+      }
+
+      animation: show 1s forwards;
+    }
+
+    .completed {
+      .hide-section {
+        animation: hideSection 1.5s forwards;
+      }
+
+      .show-section {
+        animation: showSection 0.5s forwards;
+      }
+      .completed-title {
+        margin: 0;
+        margin-top: 0.5rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        flex-direction: row;
+        font-size: 0.75rem;
+        color: $text-secondary;
+        letter-spacing: 0.1rem;
+
+        &:before,
+        &:after {
+          content: "";
+          flex: 1 1;
+          border-bottom: 0.05rem solid $text-secondary;
+          margin: auto;
         }
       }
     }

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Shopping from "./Shopping/Shopping";
+import Shopping from "./Shopping/components/Shopping";
 
 function App() {
   return (

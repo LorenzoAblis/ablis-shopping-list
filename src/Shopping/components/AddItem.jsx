@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { db } from "../../firebaseConfig";
+import { db } from "/firebaseConfig";
 import { ref, set } from "firebase/database";
 
-import "./EditItem.scss";
+import "../styles/AddItem.scss";
 
-const EditItem = ({ showEditItem, setShowEditItem }) => {
+const AddItem = ({ showAddItem, setShowAddItem }) => {
   const [newItem, setNewItem] = useState({});
 
   const handleClose = () => {
-    setShowEditItem(false);
+    setShowAddItem(false);
     setNewItem({
       name: "",
-      quantity: 0,
+      quantity: null,
       store: "",
       description: "",
     });
@@ -24,14 +24,16 @@ const EditItem = ({ showEditItem, setShowEditItem }) => {
     }
   };
 
-  const handleEdit = async () => {
-    await set(ref(db, "shopping_items/" + newItem.name), {
-      name: newItem.name || "",
-      quantity: newItem.quantity || 0,
-      store: newItem.store || "",
-      description: newItem.description || "",
-      completed: false,
-    });
+  const handleAdd = async () => {
+    if (newItem.name) {
+      await set(ref(db, "shopping_items/" + newItem.name), {
+        name: newItem.name || "",
+        quantity: newItem.quantity || 0,
+        store: newItem.store || "",
+        description: newItem.description || "",
+        completed: false,
+      });
+    }
 
     handleClose();
   };
