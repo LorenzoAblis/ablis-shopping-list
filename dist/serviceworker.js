@@ -1,5 +1,14 @@
 const CACHE_NAME = "ablis-inventory-v1";
-const urlsToCache = ["/", "/index.html", "/manifest.json"];
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "bootstrap-icons-BOrJxbIo.woff",
+  "bootstrap-icons-BtvjY1KL.woff2",
+  "index-DqAWn_Hy.js",
+  "index-JT-mb5T3.css",
+  "manifest-BPdnH4JQ.json",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
