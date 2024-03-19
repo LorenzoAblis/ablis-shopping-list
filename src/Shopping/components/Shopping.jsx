@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import ShoppingItem from "../components/ShoppingItem";
 import AddItem from "../components/AddItem";
 import EditItem from "../components/EditItem";
+import Checkout from "../components/Checkout";
 import "../styles/Shopping.scss";
 
 const Shopping = () => {
@@ -13,6 +14,7 @@ const Shopping = () => {
   const [stores, setStores] = useState([]);
   const [showAddItem, setShowAddItem] = useState(false);
   const [showEditItem, setShowEditItem] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const [itemToEdit, setItemToEdit] = useState({});
 
   const handleExpand = (storeIndex) => {
@@ -87,7 +89,10 @@ const Shopping = () => {
 
   return (
     <>
-      <Navbar setShowAddItem={setShowAddItem} />
+      <Navbar
+        setShowAddItem={setShowAddItem}
+        setShowCheckout={setShowCheckout}
+      />
       <main>
         <h1 className="nav-title">Shopping List</h1>
         {items.length == 0 && <h2 className="no-items">No items in list</h2>}
@@ -157,6 +162,10 @@ const Shopping = () => {
           </section>
         ))}
 
+        <Checkout
+          showCheckout={showCheckout}
+          setShowCheckout={setShowCheckout}
+        />
         <AddItem showAddItem={showAddItem} setShowAddItem={setShowAddItem} />
         <EditItem
           showEditItem={showEditItem}
