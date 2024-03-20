@@ -1,0 +1,56 @@
+/* Navbar.scss */
+@import "../../index.scss";
+
+footer {
+  z-index: 400;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  transform: translateX(-2.1%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $background-secondary;
+  height: 3.5rem;
+
+  .navbar-content {
+    width: 100%;
+    height: 100%;
+
+    .navbar-buttons {
+      margin: 0;
+      display: flex;
+      justify-content: space-evenly;
+      list-style: none;
+      padding: 0;
+      height: 100%;
+
+      li {
+        width: 50%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+
+        .navbar-button {
+          width: 100%;
+          height: 100%;
+          color: white;
+          background-color: black;
+          padding: 0.25rem;
+          border: none;
+          display: inline;
+          align-items: center;
+
+          i {
+            margin: 0;
+            font-size: 1.2rem;
+          }
+          p {
+            margin: 0;
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+}

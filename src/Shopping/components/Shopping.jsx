@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "/firebaseConfig";
 import { ref, onValue } from "firebase/database";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../../Common/components/Navbar";
 import ShoppingItem from "../components/ShoppingItem";
 import AddItem from "../components/AddItem";
 import EditItem from "../components/EditItem";
@@ -89,12 +89,21 @@ const Shopping = () => {
 
   return (
     <>
-      <Navbar
-        setShowAddItem={setShowAddItem}
-        setShowCheckout={setShowCheckout}
-      />
       <main>
-        <h1 className="nav-title">Shopping List</h1>
+        <header>
+          <h1 className="nav-title">Shopping List</h1>
+          <div className="button-group">
+            <button className="add-button" onClick={() => setShowAddItem(true)}>
+              <i className="bi bi-plus-lg"></i>Add
+            </button>
+            <button
+              className="checkout-button"
+              onClick={() => setShowCheckout(true)}
+            >
+              <i className="bi bi-basket-fill"></i>Checkout
+            </button>
+          </div>
+        </header>
         {items.length == 0 && <h2 className="no-items">No items in list</h2>}
         {stores.map((store, index) => (
           <section key={index}>
@@ -175,8 +184,8 @@ const Shopping = () => {
           item={itemToEdit}
         />
       </main>
+      <Navbar></Navbar>
     </>
-    // <Test></Test>
   );
 };
 

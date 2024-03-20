@@ -3,12 +3,43 @@
 main {
   overflow-x: hidden;
 
-  .nav-title {
-    padding-left: 0.51rem;
-    font-size: 1.6rem;
-    margin: 0;
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;
+  header {
+    .nav-title {
+      padding-left: 0.51rem;
+      font-size: 1.8rem;
+      margin: 0;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .button-group {
+      margin: 0.5rem 0;
+      display: flex;
+      justify-content: space-evenly;
+
+      button {
+        width: 48%;
+        color: white;
+        padding: 0.25rem;
+        border-radius: 1rem;
+        border: none;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+      }
+
+      .add-button {
+        background-color: green;
+        box-shadow: 0 0 0.25rem green;
+      }
+
+      .checkout-button {
+        background-color: skyblue;
+        box-shadow: 0 0 0.25rem skyblue;
+      }
+    }
   }
 
   .no-items {
@@ -108,6 +139,7 @@ main {
         border-radius: 1rem;
         transition: all 0.5s;
         width: 85vw;
+        box-shadow: 0 0 0.3rem $background-secondary;
 
         .complete {
           display: flex;
