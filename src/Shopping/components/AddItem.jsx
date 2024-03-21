@@ -4,6 +4,7 @@ import { db } from "/firebaseConfig";
 import { ref, set } from "firebase/database";
 
 import Modal from "../../Common/components/Modal";
+import Dropdown from "../../Common/components/Dropdown";
 import "../styles/AddItem.scss";
 
 const AddItem = ({ showAddItem, setShowAddItem }) => {
@@ -43,7 +44,7 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
       setShowModal={setShowAddItem}
       title="Add Item"
     >
-      <div className="form">
+      <div className="add-item-form">
         <div className="form-group">
           <h3>Name</h3>
           <input
@@ -54,23 +55,16 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
           />
         </div>
         <div className="form-group-big">
-          <div className="form-group amount">
+          <div className="form-group">
             <h3>Amount</h3>
-            <input
-              type="number"
-              name="quantity"
-              value={newItem.quantity}
-              onChange={handleChange}
-            />
+            <Dropdown options={[1, 2, 3, 4, 5]} className="amount"></Dropdown>
           </div>
           <div className="form-group">
-            <h3>Store</h3>
-            <input
-              type="text"
-              name="store"
-              value={newItem.store}
-              onChange={handleChange}
-            />
+            <h3>Location</h3>
+            <Dropdown
+              options={["Costco", "Walmart", "Other"]}
+              className="location"
+            ></Dropdown>
           </div>
         </div>
         <div className="form-group">

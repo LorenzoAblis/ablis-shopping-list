@@ -36,14 +36,14 @@ const Shopping = () => {
         const newItems = Object.values(data).map((item) => item);
         setItems(newItems);
         const uniqueStores = Array.from(
-          new Set(newItems.map((item) => item.store))
+          new Set(newItems.map((item) => item.store)),
         );
         setStores(
           uniqueStores.map((storeName) => ({
             name: storeName,
             expanded: true,
             completed: false,
-          }))
+          })),
         );
       } else {
         setItems([]);
