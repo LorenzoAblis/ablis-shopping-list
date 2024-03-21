@@ -10,7 +10,7 @@ const Navbar = () => {
           <li>
             <button
               className="shopping-button navbar-button"
-              onClick={() => navigate("/shopping")}
+              onClick={() => navigate("/")}
             >
               <i className="bi bi-cart-fill"></i>
               <p>Shopping</p>
