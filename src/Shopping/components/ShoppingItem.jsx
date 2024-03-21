@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { db } from "/firebaseConfig";
-import { ref, set, remove } from "firebase/database";
+import { ref, update, remove } from "firebase/database";
 
 const ShoppingItem = ({ item, setShowEditItem, setItemToEdit }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -26,11 +26,7 @@ const ShoppingItem = ({ item, setShowEditItem, setItemToEdit }) => {
   };
 
   const handleComplete = async () => {
-    await set(ref(db, "shopping_items/" + item.name), {
-      name: item.name,
-      quantity: item.quantity,
-      store: item.store,
-      description: item.description,
+    await update(ref(db, "shopping_items/" + item.name), {
       completed: item.completed ? false : true,
     });
   };

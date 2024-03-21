@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { db } from "/firebaseConfig";
-import { ref, set, remove } from "firebase/database";
+import { ref, update, remove } from "firebase/database";
 
 import Modal from "../../Common/components/Modal";
 import "../styles/Checkout.scss";
@@ -31,11 +31,7 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
     const itemsToClear = items.filter((item) => item.completed);
     for (const item of itemsToClear) {
       if (item.name) {
-        await set(ref(db, "shopping_items/" + item.name), {
-          name: item.name || "",
-          quantity: item.quantity || 0,
-          store: item.store || "",
-          description: item.description || "",
+        await update(ref(db, "shopping_items/" + item.name), {
           completed: false,
         });
       }

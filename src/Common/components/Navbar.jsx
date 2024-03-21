@@ -1,27 +1,36 @@
 import "../styles/Navbar.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <footer>
       <div className="navbar-content">
         <ul className="navbar-buttons">
           <li>
-            <button
-              className="shopping-button navbar-button"
-              onClick={() => navigate("/")}
-            >
-              <i className="bi bi-cart-fill"></i>
+            <button className="navbar-button" onClick={() => navigate("/")}>
+              <i
+                className={`bi ${
+                  location.pathname === "/" ? "bi-cart-fill" : "bi-cart"
+                }`}
+              ></i>
               <p>Shopping</p>
             </button>
           </li>
           <li>
             <button
-              className="history-button navbar-button"
+              className="navbar-button"
               onClick={() => navigate("/history")}
             >
-              <i className="bi bi-clock-history"></i>
+              <i
+                className={`bi ${
+                  location.pathname === "/history"
+                    ? "bi-clock-fill"
+                    : "bi-clock"
+                }`}
+              ></i>
               <p>History</p>
             </button>
           </li>

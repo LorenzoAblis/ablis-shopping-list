@@ -16,7 +16,7 @@ const EditItem = ({ showEditItem, setShowEditItem, item }) => {
         quantity: newItem.quantity || 0,
         store: newItem.store || "",
         description: newItem.description || "",
-        completed: false,
+        completed: newItem.completed || false,
       });
     }
 
