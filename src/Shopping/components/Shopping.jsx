@@ -183,6 +183,7 @@ const Shopping = () => {
           setShowEditItem={setShowEditItem}
           item={itemToEdit}
         />
+        <div className="spacer"></div>
       </main>
       <Navbar></Navbar>
     </>
