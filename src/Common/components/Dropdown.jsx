@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 
-const Dropdown = ({ options, className }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
+const Dropdown = ({
+  options,
+  className,
+  selectedOption,
+  setSelectedOption,
+}) => {
   const handleSelect = (option) => {
     setSelectedOption(option);
   };
@@ -27,6 +29,8 @@ const Dropdown = ({ options, className }) => {
 Dropdown.propTypes = {
   options: PropTypes.array.isRequired,
   className: PropTypes.string,
+  selectedOption: PropTypes.any.isRequired,
+  setSelectedOption: PropTypes.func.isRequired,
 };
 
 export default Dropdown;

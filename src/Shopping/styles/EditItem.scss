@@ -1,6 +1,6 @@
 @import "../../index.scss";
 
-.form {
+.edit-item-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,14 +26,31 @@
   }
 
   .form-group-big {
+    width: 100%;
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
 
     .amount {
-      width: 3rem;
+      width: 15vw;
+      display: flex;
+      flex-direction: column;
+
+      select {
+        color: black;
+      }
+    }
+
+    .store {
+      width: 50vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+
+      select {
+        color: black;
+      }
     }
   }
-
   .footer {
     display: flex;
     margin-top: 1rem;

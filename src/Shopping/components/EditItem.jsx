@@ -4,6 +4,7 @@ import { db } from "/firebaseConfig";
 import { ref, set } from "firebase/database";
 
 import Modal from "../../Common/components/Modal";
+import Dropdown from "../../Common/components/Dropdown";
 import "../styles/EditItem.scss";
 
 const EditItem = ({ showEditItem, setShowEditItem, item }) => {
@@ -38,7 +39,7 @@ const EditItem = ({ showEditItem, setShowEditItem, item }) => {
       setShowModal={setShowEditItem}
       title="Edit Item"
     >
-      <div className="form">
+      <div className="edit-item-form">
         <div className="form-group">
           <h3>Name </h3>
           <input
@@ -49,21 +50,31 @@ const EditItem = ({ showEditItem, setShowEditItem, item }) => {
           />
         </div>
         <div className="form-group-big">
-          <div className="form-group amount">
-            <h3>Amount </h3>
-            <input
-              type="number"
-              name="quantity"
-              value={newItem.quantity}
-              onChange={handleChange}
+          <div className="form-group">
+            <h3>Amount</h3>
+            <Dropdown
+              options={[1, 2, 3, 4, 5]}
+              className="amount"
+              selectedOption={newItem.quantity}
+              setSelectedOption={(quantity) =>
+                handleChange({ target: { name: "quantity", value: quantity } })
+              }
             />
           </div>
           <div className="form-group">
-            <h3>Store </h3>
+            <h3>Location</h3>
+            <Dropdown
+              options={["Costco", "Walmart", "Other"]}
+              className="store"
+              selectedOption={newItem.store}
+              setSelectedOption={(store) =>
+                handleChange({ target: { name: "store", value: store } })
+              }
+            />
             <input
               type="text"
               name="store"
-              value={newItem.store}
+              placeholder="Enter store name"
               onChange={handleChange}
             />
           </div>

@@ -18,8 +18,8 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
     if (newItem.name) {
       await set(ref(db, "shopping_items/" + newItem.name), {
         name: newItem.name || "",
-        quantity: newItem.quantity || 0,
-        store: newItem.store || "",
+        quantity: newItem.quantity || 1,
+        store: newItem.store || "Costco",
         description: newItem.description || "",
         completed: false,
       });
@@ -30,7 +30,12 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
   };
 
   const handleChange = (e) => {
-    setNewItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+
+    setNewItem((prevItem) => ({
+      ...prevItem,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
@@ -57,14 +62,31 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
         <div className="form-group-big">
           <div className="form-group">
             <h3>Amount</h3>
-            <Dropdown options={[1, 2, 3, 4, 5]} className="amount"></Dropdown>
+            <Dropdown
+              options={[1, 2, 3, 4, 5]}
+              className="amount"
+              selectedOption={newItem.quantity}
+              setSelectedOption={(quantity) =>
+                handleChange({ target: { name: "quantity", value: quantity } })
+              }
+            />
           </div>
           <div className="form-group">
             <h3>Location</h3>
             <Dropdown
               options={["Costco", "Walmart", "Other"]}
-              className="location"
-            ></Dropdown>
+              className="store"
+              selectedOption={newItem.store}
+              setSelectedOption={(store) =>
+                handleChange({ target: { name: "store", value: store } })
+              }
+            />
+            <input
+              type="text"
+              name="store"
+              placeholder="Enter store name"
+              onChange={handleChange}
+            />
           </div>
         </div>
         <div className="form-group">
