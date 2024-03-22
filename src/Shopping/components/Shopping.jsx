@@ -35,19 +35,29 @@ const Shopping = () => {
       if (data) {
         const newItems = Object.values(data).map((item) => item);
         setItems(newItems);
+
         const uniqueStores = Array.from(
           new Set(newItems.map((item) => item.store))
         );
-        setStores(
-          uniqueStores.map((storeName) => ({
-            name: storeName,
-            expanded: stores,
-            completed: false,
-          }))
-        );
+
+        setStores((prevStores) => {
+          const updatedStores = [...prevStores];
+          uniqueStores.forEach((storeName) => {
+            const existingStoreIndex = updatedStores.findIndex(
+              (store) => store.name === storeName
+            );
+            if (existingStoreIndex === -1) {
+              updatedStores.push({
+                name: storeName,
+                expanded: true,
+                completed: getItemCompleted(storeName),
+              });
+            }
+          });
+          return updatedStores;
+        });
       } else {
         setItems([]);
-        setStores([]);
       }
     });
   };

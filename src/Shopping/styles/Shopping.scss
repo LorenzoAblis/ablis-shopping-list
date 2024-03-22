@@ -4,6 +4,7 @@ main {
   overflow-x: hidden;
 
   header {
+    overflow-x: hidden;
     margin-top: 2rem;
 
     .nav-title {
@@ -45,12 +46,14 @@ main {
   }
 
   .no-items {
+    overflow-x: hidden;
     text-align: center;
     font-size: 1.25rem;
     color: $text-secondary;
   }
 
   section {
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
@@ -130,6 +133,7 @@ main {
     }
 
     .shopping-items {
+      overflow-x: hidden;
       display: grid;
       row-gap: 0.5rem;
       transition: all 0.5s;
