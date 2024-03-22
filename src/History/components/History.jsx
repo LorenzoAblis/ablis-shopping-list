@@ -1,9 +1,26 @@
-// import PropTypes from "prop-types";
-
+import { useState, useEffect } from "react";
+import { db } from "/firebaseConfig";
+import { ref, onValue } from "firebase/database";
 import Navbar from "../../Common/components/Navbar";
 import "../styles/History.scss";
 
 const History = () => {
+  const [history, setHistory] = useState({});
+
+  const fetchHistory = () => {
+    const historyRef = ref(db, "history");
+    onValue(historyRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setHistory(data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
   return (
     <>
       <main>
@@ -11,46 +28,42 @@ const History = () => {
           <h1>Recently Bought</h1>
         </header>
         <section className="history-items">
-          <div className="history-item">
-            <div className="header">
-              <h2>Friday, Mar 15</h2>
-              <div className="header-details">
-                <p>
-                  <i className="bi bi-geo-alt-fill"></i> Costco
-                </p>
-                <p>
-                  <i className="bi bi-clock-fill"></i> 07:34 AM
-                </p>
-                <p>
-                  <i className="bi bi-basket-fill"></i> 13 items
-                </p>
+          {Object.entries(history).map(([date, storeItems]) => (
+            <div key={date} className="history-item">
+              <div className="header">
+                <h2>{date}</h2>
+                <div className="header-details">
+                  <p>
+                    <i className="bi bi-geo-alt-fill"></i>{" "}
+                    {Object.values(storeItems)[0]?.store}
+                  </p>
+                  <p>
+                    <i className="bi bi-clock-fill"></i>
+                    {Object.values(storeItems)[0]?.time}
+                  </p>
+                  <p>
+                    <i className="bi bi-basket-fill"></i>{" "}
+                    {Object.values(storeItems).length} items
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="content">
-              <div className="store">
-                <h3>Costco</h3>
-                <div className="store-items">
-                  <p>1 bottle x Handsoap</p>
-                  <p>3 packs x Oreos</p>
-                  <p>2 loaves x Bread</p>
-                  <p>4 packs x Toilet Paper</p>
+              <div className="content">
+                <div className="store">
+                  <h3>{Object.values(storeItems)[0]?.store}</h3>
+                  <div className="store-items">
+                    {Object.values(storeItems).flatMap((item) => (
+                      <p key={item.name}>
+                        {item.quantity} {item.description} x {item.name}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="history-item">
-            <div className="header">
-              <h2>Friday, Mar 15</h2>
-              <div className="header-details">
-                <p>Costco</p>
-                <p>07:34 AM</p>
-                <p>13 items</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </section>
       </main>
-      <Navbar></Navbar>
+      <Navbar />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { db } from "/firebaseConfig";
-import { ref, update, remove } from "firebase/database";
+import { ref, update, remove, set } from "firebase/database";
 
 import Modal from "../../Common/components/Modal";
 import "../styles/Checkout.scss";
@@ -20,6 +20,41 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
 
   const handleCheckout = async () => {
     const itemsToRemove = items.filter((item) => item.completed);
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1); // Add one day for testing just uncomment
+
+    const formattedDate = currentDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+    });
+    const formattedTime = currentDate.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+
+    const itemsByDate = itemsToRemove.reduce((acc, item) => {
+      const itemDate = formattedDate;
+      if (!acc[itemDate]) {
+        acc[itemDate] = {};
+      }
+      acc[itemDate][item.name] = {
+        name: item.name || "",
+        quantity: item.quantity || 1,
+        store: item.store || "Costco",
+        description: item.description || "",
+        date: formattedDate,
+        time: formattedTime,
+      };
+      return acc;
+    }, {});
+
+    for (const [date, itemsOnDate] of Object.entries(itemsByDate)) {
+      const historyRef = ref(db, `history/${date}`);
+      await set(historyRef, itemsOnDate);
+    }
+
     for (const item of itemsToRemove) {
       await remove(ref(db, "shopping_items/" + item.name));
     }

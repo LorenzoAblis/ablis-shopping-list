@@ -49,6 +49,9 @@ main {
           color: $text-secondary;
 
           p {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
             margin: 0;
             font-weight: 600;
             font-size: 0.9rem;
