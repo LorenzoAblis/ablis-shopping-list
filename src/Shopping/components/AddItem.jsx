@@ -9,6 +9,7 @@ import "../styles/AddItem.scss";
 
 const AddItem = ({ showAddItem, setShowAddItem }) => {
   const [newItem, setNewItem] = useState({});
+  const [isOtherStore, setIsOtherStore] = useState(false);
 
   const handleClose = () => {
     setShowAddItem(false);
@@ -39,8 +40,8 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
   };
 
   useEffect(() => {
-    console.log(newItem);
-  }, [newItem]);
+    setIsOtherStore(newItem.store === "Other");
+  }, []);
 
   return (
     <Modal
@@ -77,16 +78,22 @@ const AddItem = ({ showAddItem, setShowAddItem }) => {
               options={["Costco", "Walmart", "Other"]}
               className="store"
               selectedOption={newItem.store}
-              setSelectedOption={(store) =>
-                handleChange({ target: { name: "store", value: store } })
-              }
+              setSelectedOption={(store) => {
+                handleChange({ target: { name: "store", value: store } });
+                if (store !== newItem.store) {
+                  setIsOtherStore(store === "Other");
+                }
+              }}
             />
-            <input
-              type="text"
-              name="store"
-              placeholder="Enter store name"
-              onChange={handleChange}
-            />
+            {isOtherStore && (
+              <input
+                type="text"
+                name="store"
+                placeholder="Enter store name"
+                value={newItem.store}
+                onChange={handleChange}
+              />
+            )}
           </div>
         </div>
         <div className="form-group">

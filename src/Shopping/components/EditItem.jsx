@@ -9,6 +9,7 @@ import "../styles/EditItem.scss";
 
 const EditItem = ({ showEditItem, setShowEditItem, item }) => {
   const [newItem, setNewItem] = useState({});
+  const [isOtherStore, setIsOtherStore] = useState(false);
 
   const handleEdit = async () => {
     if (newItem.name) {
@@ -67,16 +68,22 @@ const EditItem = ({ showEditItem, setShowEditItem, item }) => {
               options={["Costco", "Walmart", "Other"]}
               className="store"
               selectedOption={newItem.store}
-              setSelectedOption={(store) =>
-                handleChange({ target: { name: "store", value: store } })
-              }
+              setSelectedOption={(store) => {
+                handleChange({ target: { name: "store", value: store } });
+                if (store !== newItem.store) {
+                  setIsOtherStore(store === "Other");
+                }
+              }}
             />
-            <input
-              type="text"
-              name="store"
-              placeholder="Enter store name"
-              onChange={handleChange}
-            />
+            {isOtherStore && (
+              <input
+                type="text"
+                name="store"
+                placeholder="Enter store name"
+                value={newItem.store}
+                onChange={handleChange}
+              />
+            )}
           </div>
         </div>
         <div className="form-group">

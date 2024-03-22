@@ -4,7 +4,6 @@ main {
   overflow-x: hidden;
 
   header {
-    overflow-x: hidden;
     margin-top: 2rem;
 
     .nav-title {
@@ -46,14 +45,12 @@ main {
   }
 
   .no-items {
-    overflow-x: hidden;
     text-align: center;
     font-size: 1.25rem;
     color: $text-secondary;
   }
 
   section {
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
@@ -62,6 +59,7 @@ main {
     transition: all 1s;
 
     .header {
+      overflow-x: hidden;
       display: flex;
       gap: 0.5rem;
       align-items: center;
@@ -69,6 +67,7 @@ main {
 
       h1 {
         margin: 0;
+        overflow-x: hidden;
         font-size: 1.3rem;
         font-weight: 600;
       }
@@ -96,44 +95,7 @@ main {
       }
     }
 
-    .hide-section {
-      @keyframes hideSection {
-        0% {
-          opacity: 1;
-          z-index: 100;
-          transform: translateX(0%);
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(200%);
-          z-index: -100;
-          position: absolute;
-        }
-      }
-
-      animation: hideSection 1.5s forwards;
-    }
-
-    .show-section {
-      @keyframes showSection {
-        0% {
-          position: absolute;
-          opacity: 0;
-          z-index: -100;
-          transform: translateX(200%);
-        }
-        100% {
-          opacity: 1;
-          z-index: 100;
-          transform: translateX(0%);
-        }
-      }
-
-      animation: showSection 0.5s forwards;
-    }
-
     .shopping-items {
-      overflow-x: hidden;
       display: grid;
       row-gap: 0.5rem;
       transition: all 0.5s;
@@ -148,6 +110,7 @@ main {
         box-shadow: 0 0 0.3rem $background-secondary;
 
         .complete {
+          overflow-x: hidden;
           display: flex;
           width: 1.5rem;
           height: 1.5rem;
@@ -169,6 +132,7 @@ main {
         .details {
           display: flex;
           z-index: -10;
+
           p {
             display: grid;
             align-items: center;
@@ -257,6 +221,42 @@ main {
       }
     }
 
+    .hide-section {
+      @keyframes hideSection {
+        0% {
+          opacity: 1;
+          z-index: 100;
+          transform: translateX(0%);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-200%);
+          z-index: -100;
+          position: absolute;
+        }
+      }
+
+      animation: hideSection 1.5s forwards;
+    }
+
+    .show-section {
+      @keyframes showSection {
+        0% {
+          position: absolute;
+          opacity: 0;
+          z-index: -100;
+          transform: translateX(-200%);
+        }
+        100% {
+          opacity: 1;
+          z-index: 100;
+          transform: translateX(0%);
+        }
+      }
+
+      animation: showSection 0.5s forwards;
+    }
+
     .hide-completed {
       @keyframes hide {
         0% {
@@ -276,6 +276,7 @@ main {
     }
 
     .show-completed {
+      overflow-x: hidden;
       @keyframes show {
         0% {
           opacity: 0;
@@ -294,14 +295,18 @@ main {
     }
 
     .completed {
+      overflow-x: hidden;
       .hide-section {
+        overflow-x: hidden;
         animation: hideSection 1.5s forwards;
       }
 
       .show-section {
+        overflow-x: hidden;
         animation: showSection 0.5s forwards;
       }
       .completed-title {
+        overflow-x: hidden;
         margin: 0;
         margin-top: 0.5rem;
         margin-bottom: 0.75rem;
@@ -313,6 +318,7 @@ main {
 
         &:before,
         &:after {
+          overflow-x: hidden;
           content: "";
           flex: 1 1;
           border-bottom: 0.05rem solid $text-secondary;
@@ -323,6 +329,7 @@ main {
   }
 
   .spacer {
+    overflow-x: hidden;
     margin-bottom: 5rem;
   }
 }
