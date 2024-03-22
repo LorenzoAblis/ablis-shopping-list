@@ -21,7 +21,7 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
   const handleCheckout = async () => {
     const itemsToRemove = items.filter((item) => item.completed);
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1); // Add one day for testing just uncomment
+    // currentDate.setDate(currentDate.getDate() + 1); // Add one day for testing just uncomment
 
     const formattedDate = currentDate.toLocaleDateString("en-US", {
       weekday: "long",
@@ -39,20 +39,27 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
       if (!acc[itemDate]) {
         acc[itemDate] = {};
       }
-      acc[itemDate][item.name] = {
-        name: item.name || "",
-        quantity: item.quantity || 1,
-        store: item.store || "Costco",
-        description: item.description || "",
-        date: formattedDate,
-        time: formattedTime,
-      };
+      // Check if the item already exists for this date
+      if (!acc[itemDate][item.name]) {
+        // If it doesn't exist, add it
+        acc[itemDate][item.name] = {
+          name: item.name || "",
+          quantity: item.quantity || 1,
+          store: item.store || "Costco",
+          description: item.description || "",
+          date: formattedDate,
+          time: formattedTime,
+        };
+      } else {
+        // If it exists, update the quantity
+        acc[itemDate][item.name].quantity += item.quantity;
+      }
       return acc;
     }, {});
 
     for (const [date, itemsOnDate] of Object.entries(itemsByDate)) {
       const historyRef = ref(db, `history/${date}`);
-      await set(historyRef, itemsOnDate);
+      await update(historyRef, itemsOnDate); // Use update instead of set
     }
 
     for (const item of itemsToRemove) {

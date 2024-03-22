@@ -62,6 +62,7 @@ const History = () => {
             </div>
           ))}
         </section>
+        <div className="spacer"></div>
       </main>
       <Navbar />
     </>
