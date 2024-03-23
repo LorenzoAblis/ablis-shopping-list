@@ -10,7 +10,6 @@ const History = () => {
   const [history, setHistory] = useState({});
   const [showViewDay, setShowViewDay] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedMetaItem, setSelectedMetaItem] = useState(null);
 
   const fetchHistory = () => {
     const historyRef = ref(db, "history");
@@ -40,10 +39,9 @@ const History = () => {
     return items;
   };
 
-  const handleViewDay = (date, metaItem) => {
+  const handleViewDay = (date) => {
     setShowViewDay(true);
     setSelectedDate(date);
-    setSelectedMetaItem(metaItem);
   };
 
   useEffect(() => {
@@ -63,9 +61,7 @@ const History = () => {
               <div
                 key={date}
                 className="history-item"
-                onClick={() =>
-                  handleViewDay(date, Object.values(storeItems)[0])
-                }
+                onClick={() => handleViewDay(date)}
               >
                 <div className="header">
                   <h2>{date}</h2>
@@ -113,7 +109,6 @@ const History = () => {
           date={selectedDate}
           getStoresFromHistory={getStoresFromHistory}
           getItemsForStoreAndDate={getItemsForStoreAndDate}
-          metaItem={selectedMetaItem}
         />
         <div className="spacer"></div>
       </main>

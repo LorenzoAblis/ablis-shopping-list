@@ -9,7 +9,6 @@ const ViewDay = ({
   date,
   getStoresFromHistory,
   getItemsForStoreAndDate,
-  metaItem,
 }) => {
   return (
     <Modal
@@ -29,15 +28,19 @@ const ViewDay = ({
               <h3>{store}</h3>
               <div className="store-items">
                 {getItemsForStoreAndDate(store, date).map((item) => (
-                  <p key={item.name}>
-                    {metaItem.time}
-                    {item.quantity} {item.description} x {item.name}
-                  </p>
+                  <div key={item.name} className="store-item">
+                    <p>
+                      {item.quantity} {item.description} x {item.name}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
           );
         })}
+        <div className="footer">
+          <button>Edit</button>
+        </div>
       </div>
     </Modal>
   );
@@ -49,7 +52,6 @@ ViewDay.propTypes = {
   date: PropTypes.string.isRequired,
   getStoresFromHistory: PropTypes.func.isRequired,
   getItemsForStoreAndDate: PropTypes.func.isRequired,
-  metaItem: PropTypes.object.isRequired,
 };
 
 export default ViewDay;

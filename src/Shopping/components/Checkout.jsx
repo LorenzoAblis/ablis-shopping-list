@@ -39,9 +39,8 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
       if (!acc[itemDate]) {
         acc[itemDate] = {};
       }
-      // Check if the item already exists for this date
+
       if (!acc[itemDate][item.name]) {
-        // If it doesn't exist, add it
         acc[itemDate][item.name] = {
           name: item.name || "",
           quantity: item.quantity || 1,
@@ -51,7 +50,6 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
           time: formattedTime,
         };
       } else {
-        // If it exists, update the quantity
         acc[itemDate][item.name].quantity += item.quantity;
       }
       return acc;
@@ -59,7 +57,7 @@ const Checkout = ({ showCheckout, setShowCheckout, items, stores }) => {
 
     for (const [date, itemsOnDate] of Object.entries(itemsByDate)) {
       const historyRef = ref(db, `history/${date}`);
-      await update(historyRef, itemsOnDate); // Use update instead of set
+      await update(historyRef, itemsOnDate);
     }
 
     for (const item of itemsToRemove) {
