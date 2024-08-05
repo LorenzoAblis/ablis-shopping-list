@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ShoppingLayout from "./pages/Shopping/ShoppingLayout";
+import ShoppingView from "./pages/Shopping/ShoppingView";
 
 function App() {
   const router = createBrowserRouter([
@@ -9,7 +9,7 @@ function App() {
     // },
     {
       path: "/",
-      element: <ShoppingLayout />,
+      element: <ShoppingView />,
     },
   ]);
   return (
