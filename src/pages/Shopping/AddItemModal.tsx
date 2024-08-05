@@ -45,6 +45,13 @@ const AddItemModal = ({ isOpen, onClose }: AddItemModalProps) => {
     onSuccess: () => {
       // Invalidate and refetch the query
       queryClient.invalidateQueries(["items"]);
+      setNewItem({
+        name: "",
+        quantity: 0,
+        completed: false,
+        store: "Costco",
+        description: "",
+      });
       onClose();
     },
     onError: (err: Error) => {

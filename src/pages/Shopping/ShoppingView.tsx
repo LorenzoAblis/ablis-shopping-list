@@ -18,6 +18,7 @@ import { BsCart3 } from "react-icons/bs";
 import ShoppingItem from "./ShoppingItem";
 import AddItemModal from "./AddItemModal";
 import EditItemModal from "./EditItemModal";
+import CheckoutModal from "./CheckoutModal";
 
 const ShoppingView = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -26,6 +27,7 @@ const ShoppingView = () => {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState<{
     store: string;
@@ -84,7 +86,12 @@ const ShoppingView = () => {
           >
             Add
           </Button>
-          <Button leftIcon={<BsCart3 />} bg="skyblue" color="white">
+          <Button
+            leftIcon={<BsCart3 />}
+            bg="skyblue"
+            color="white"
+            onClick={() => setShowCheckoutModal(true)}
+          >
             Checkout
           </Button>
         </ButtonGroup>
@@ -148,6 +155,11 @@ const ShoppingView = () => {
         onClose={() => setShowEditModal(false)}
         itemToEdit={itemToEdit}
         setItemToEdit={setItemToEdit}
+      />
+      <CheckoutModal
+        isOpen={showCheckoutModal}
+        onClose={() => setShowCheckoutModal(false)}
+        items={items}
       />
     </main>
   );
