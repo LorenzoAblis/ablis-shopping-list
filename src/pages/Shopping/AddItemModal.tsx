@@ -56,7 +56,6 @@ const AddItemModal = ({ isOpen, onClose }: AddItemModalProps) => {
     },
     onError: (err: Error) => {
       console.error(err);
-      //   TODO: Handle errors
       setError("Failed to add item. Please try again.");
     },
   });
@@ -78,6 +77,14 @@ const AddItemModal = ({ isOpen, onClose }: AddItemModalProps) => {
   const handleAdd = () => {
     if (newItem.name.trim() === "") {
       setError("Name is required.");
+      return;
+    }
+    if (newItem.name.includes("/")) {
+      setError("Name cannot contain forward slash (/).");
+      return;
+    }
+    if (newItem.name.includes(".")) {
+      setError("Name cannot contain a period (.).");
       return;
     }
 
